@@ -35,5 +35,9 @@ a {
 
 img.missed_gif {
   position: relative;
-  left: 45em;
+  /*left: 45em;*/
+}
+
+img.super_atk_gif {
+  position: relative;
 }

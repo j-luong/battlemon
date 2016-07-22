@@ -10,20 +10,26 @@
   <br>
   <%= @game.players.first.name %>: <%= @game.players.first.hit_points %>HP - <%= @game.players.last.name %>: <%= @game.players.last.hit_points %>HP
   <br>
-  <form action="/attack" class='attack_button' method="post">
-    <input type="submit" value='Attack <%= @game.victim.name%>!'>
-  </form>
-
-  <% if @game.attacker.dead? %>
-    <%= @game.attacker.name.capitalize %> LOSES
+  <% if @game.attacker.dead? == false %>
+    <form action="/attack" class='attack_button' method="post">
+      <input type="submit" value='Attack <%= @game.victim.name%>!'>
+    </form>
   <% end %>
 
   <% if @game.attacker.damage %>
     <%=@game.attacker.name %> took <%=@game.attacker.damage %> damage!
   <% end %>
   <br>
+  <% if @game.attacker.dead? %>
+    <img class="missed_gif" src="https://media.giphy.com/media/PiiQ5B1XxxiX6/giphy.gif" alt="missed" />
+    <br>
+    <%= @game.attacker.name.upcase %> LOSES
+  <% end %>
   <h1 class="message"><%=@game.damage_message(@game.attacker.damage) %></h1>
   <% if @game.attacker.damage == 0 %>
     <img class="missed_gif" src="http://24.media.tumblr.com/34bd73e91dc2b703101c00e24da1cb66/tumblr_mu2qlg4VTO1rey868o1_500.gif" alt="missed" />
+  <% end %>
+  <% if @game.attacker.damage == 10 %>
+    <img class="missed_gif" src="http://i.imgur.com/DJZje2D.gif" alt="missed" />
   <% end %>
 </body>
